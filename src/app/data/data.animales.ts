@@ -43,4 +43,25 @@ export const ANIMALES =[
     duracion: 4,
     reproduciendo: false
 },
+{
+    nombre: "Vaca",
+    imagen: "assets/animales/vaca.png",
+    audio: "assets/sonidos/vaca.mp3",
+    duracion: 4,
+    reproduciendo: false
+},
+{
+    nombre: "Oso",
+    imagen: "assets/animales/oso.png",
+    audio: "assets/sonidos/oso.mp3",
+    duracion: 4,
+    reproduciendo: false
+},
+{
+    nombre: "Lobo",
+    imagen: "assets/animales/lobo.png",
+    audio: "assets/sonidos/lobo.mp3",
+    duracion: 4,
+    reproduciendo: false
+}
 ]
