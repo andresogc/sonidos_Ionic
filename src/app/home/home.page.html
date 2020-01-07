@@ -3,21 +3,53 @@
     <ion-title >
      Sonidos APP
     </ion-title>
+
+    <ion-buttons slot="end">
+      <button ion-button *ngIf="ordenando" (click) = "ordenando = false" >
+        Ordenando
+      </button>
+      <button ion-button *ngIf="!ordenando" (click) = "ordenando = true">
+        Listo
+      </button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-refresher  slot="fixed"  (ionRefresh)="recargar_animales($event)"  >
+    <ion-refresher-content ></ion-refresher-content>
+  </ion-refresher>
+
  <!-- List of Sliding Items -->
-  <ion-list>
-    <ion-item *ngFor="let animal of animales"   (click) = "reproducir (animal)">
-    
-      <ion-avatar item-left >
-        <img [src]="animal.imagen" alt="caballo">
-      </ion-avatar>
-      <h2>{{animal.nombre}}</h2>
-      <ion-icon *ngIf = "!animal.reproduciendo" name="play-circle" item-right></ion-icon>
-      <ion-icon *ngIf = "animal.reproduciendo" name="pause" item-right></ion-icon>
-    </ion-item>
+  <ion-list >
+    <ion-reorder-group [disabled]="ordenando" 
+                       (ionItemReorder)="reorder($event)">
+
+    <ion-item-sliding *ngFor="let animal of animales; let i = index " class="animated fadeIn fast" > 
+      <ion-item   (click) = "reproducir (animal)">
+      
+        <ion-avatar item-left >
+          <img [src]="animal.imagen" alt="caballo">
+        </ion-avatar>
+        <h2>{{animal.nombre}}</h2>
+        <ion-icon *ngIf = "!animal.reproduciendo" name="play-circle" item-right></ion-icon>
+        <ion-icon *ngIf = "animal.reproduciendo" name="pause" item-right></ion-icon>
+
+        <ion-reorder slot="end"></ion-reorder>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="borrar_animal(i)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+    </ion-reorder-group>
   </ion-list>
   
 </ion-content>
